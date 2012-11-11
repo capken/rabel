@@ -1,0 +1,61 @@
+sudo apt-get install build-essential zlib1g zlib1g-dev libreadline5 libreadline5-dev libssl-dev
+sudo apt-get install curl
+curl -L https://get.rvm.io | bash -s stable
+source /home/allen/.rvm/scripts/rvm
+rvm install 1.9.2
+sudo apt-get install git-core
+sudo apt-get install mysql-server mysql-client
+sudo apt-get install memcached
+sudo apt-get install nginx
+sudo apt-get install ImageMagick
+sudo apt-get install imagemagick libmagickcore-dev
+sudo apt-get install ghostscript
+sudo apt-get install postfix
+sudo apt-get uninstall postfix
+sudo apt-get remove postfix
+sudo apt-get install ghostscript
+sudo apt-get install imagemagick libmagickcore-dev
+sudo apt-get install nginx
+sudo apt-get install memcached
+sudo apt-get install unzip
+
+sudo apt-get install postfix
+
+mkdir download
+cd download/
+wget http://nodejs.org/dist/v0.8.14/node-v0.8.14.tar.gz
+tar -xvf  node-v0.8.14.tar.gz 
+cd node-v0.8.14/
+./configure
+make
+sudo make install
+node -v
+
+ssh-keygen
+
+cd code/
+git clone git@github.com:capken/rabel.git
+
+cd rabel/
+sudo apt-get install libmysqlclient-dev
+sudo apt-get install libmagick9-dev
+
+bundle install --without development test
+
+cd ~/.vim/bundle
+mkdir -p ~/.vim/autoload ~/.vim/bundle
+curl -Sso ~/.vim/autoload/pathogen.vim     https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
+cd ~/.vim/bundle
+git clone git://github.com/tpope/vim-rails.git
+
+cp config/settings.yml.example config/settings.yml
+cp config/database.yml.mysql config/database.yml
+
+RAILS_ENV=production rake db:setup
+RAILS_ENV=production rake assets:precompile
+thin config -C ~/rabel.yml -s1 -e production -p 3000 -a 127.0.0.1
+thin start -C ~/rabel.yml
+sudo vim /etc/nginx/conf.d/rabel.conf
+sudo vim /etc/hosts
+sudo nginx
+chmod -R a+x code/rabel/
